@@ -4,32 +4,41 @@
 // de mayor a menor para luego mostrarlos en una tabla por consola.
 
 
-function encontrarPalabraMasLarga(...palabras) {
-  let palabraMasLarga = "";
-  let todasIguales = true;
-  for (let palabra of palabras) {
-    if (palabra.length > palabraMasLarga.length) {
-      palabraMasLarga = palabra;
-      todasIguales = false;
-    } else if (palabra.length !== palabraMasLarga.length) {
-      todasIguales = false;
-    }
-  }
-  if (todasIguales) {
-    return "Todas las palabras tienen la misma longitud.";
-  }
-  return palabraMasLarga;
+function ordenarNumeros(...numeros) {
+  return numeros.sort((a, b) => b - a);
 }
 
 function main() {
-  let cantidad = parseInt(prompt("Ingrese la cantidad de palabras que desea ingresar:"));
-  let palabras = [];
-  for (let i = 0; i < cantidad; i++) {
-    let palabra = prompt("Ingrese la palabra " + (i + 1) + ":");
-    palabras.push(palabra);
+  let cantidad;
+  while (true) {
+    let input = prompt("Ingrese la cantidad de números que desea ingresar:");
+    if (/^\d+$/.test(input)) {
+      cantidad = parseInt(input);
+      break;
+    } else {
+      alert("Por favor, ingrese solo caracteres numéricos.");
+    }
   }
-  let palabraMasLarga = encontrarPalabraMasLarga(...palabras);
-  alert("La palabra más larga ingresada es: " + palabraMasLarga);
+  
+  let numeros = [];
+  for (let i = 0; i < cantidad; i++) {
+    let numero;
+    while (true) {
+      let input = prompt("Ingrese el número " + (i + 1) + ":");
+      if (/^-?\d*\.?\d+$/.test(input)) {
+        numero = parseFloat(input);
+        break;
+      } else {
+        alert("Por favor, ingrese solo caracteres numéricos.");
+      }
+    }
+    numeros.push(numero);
+  }
+  
+  let numerosOrdenados = ordenarNumeros(...numeros);
+
+  console.log("Números ordenados de mayor a menor:");
+  console.table(numerosOrdenados);
 }
 
 main();
