@@ -10,12 +10,32 @@ function ordenarNumeros(...numeros) {
 }
 
 function main() {
-  let cantidad = parseInt(prompt("Ingrese la cantidad de números que desea ingresar:"));
+  let cantidad;
+  while (true) {
+    let input = prompt("Ingrese la cantidad de números que desea ingresar:");
+    if (/^\d+$/.test(input)) {
+      cantidad = parseInt(input);
+      break;
+    } else {
+      alert("Por favor, ingrese solo caracteres numéricos.");
+    }
+  }
+  
   let numeros = [];
   for (let i = 0; i < cantidad; i++) {
-    let numero = parseFloat(prompt("Ingrese el número " + (i + 1) + ":"));
+    let numero;
+    while (true) {
+      let input = prompt("Ingrese el número " + (i + 1) + ":");
+      if (/^-?\d*\.?\d+$/.test(input)) {
+        numero = parseFloat(input);
+        break;
+      } else {
+        alert("Por favor, ingrese solo caracteres numéricos.");
+      }
+    }
     numeros.push(numero);
   }
+  
   let numerosOrdenados = ordenarNumeros(...numeros);
 
   console.log("Números ordenados de mayor a menor:");
@@ -23,5 +43,3 @@ function main() {
 }
 
 main();
-
-
